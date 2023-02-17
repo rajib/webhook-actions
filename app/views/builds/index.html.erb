@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Builds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Webhook action</th>
+      <th>Build info</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @builds.each do |build| %>
+      <tr>
+        <td><%= build.webhook_action_id %></td>
+        <td><%= build.build_info %></td>
+        <td><%= link_to 'Show', webhook_action_build_path(build.webhook_action_id,build) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,27 @@
+<%= form_with(model: build, local: true) do |form| %>
+  <% if build.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(build.errors.count, "error") %> prohibited this build from being saved:</h2>
+
+      <ul>
+      <% build.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :webhook_action %>
+    <%= form.text_field :webhook_action %>
+  </div>
+
+  <div class="field">
+    <%= form.label :build_info %>
+    <%= form.text_area :build_info %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

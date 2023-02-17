@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Webhook action:</strong>
+  <%= @build.webhook_action_id %>
+</p>
+
+<p>
+  <strong>Build info:</strong>
+  <%= @build.build_info %>
+</p>
+
+<%= link_to 'Back', webhook_action_builds_path(@build.webhook_action_id) %>

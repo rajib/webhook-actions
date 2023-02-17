@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Webhook Actions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Script type</th>
+      <th>Script</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @webhook_actions.each do |webhook_action| %>
+      <tr>
+        <td><%= webhook_action.title %></td>
+        <td><%= webhook_action.script_type %></td>
+        <td><%= webhook_action.script %></td>
+        <td><%= link_to 'Show', webhook_action %></td>
+        <td><%= link_to 'Builds', webhook_action_builds_path(webhook_action) %></td>
+        <td><%= link_to 'Edit', edit_webhook_action_path(webhook_action) %></td>
+        <td><%= link_to 'Destroy', webhook_action, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Webhook Action', new_webhook_action_path %>

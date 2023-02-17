@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @webhook_action.title %>
+</p>
+
+<p>
+  <strong>Script type:</strong>
+  <%= @webhook_action.script_type %>
+</p>
+
+<p>
+  <strong>Script:</strong>
+  <%= @webhook_action.script %>
+</p>
+
+<%= link_to 'Edit', edit_webhook_action_path(@webhook_action) %> |
+<%= link_to 'Back', webhook_actions_path %>
