@@ -3,7 +3,8 @@ class BuildsController < ApplicationController
 
   # GET /builds or /builds.json
   def index
-    @builds = Build.all
+    @webhook_action = WebhookAction.find(params[:webhook_action_id])
+    @builds = @webhook_action.builds
   end
 
   # GET /builds/1 or /builds/1.json
@@ -13,8 +14,13 @@ class BuildsController < ApplicationController
   # POST /builds or /builds.json
   def create
     @build = Build.new(build_params)
-    @build.webhook_action_id = params[:webhook_action_id]
+    @build.webhook_action_id = @webhook_action.id
     if @build.save
+      @@webhook_action.script.split("\r\n").each do |cmd|
+        Rails.logger.info "Exc: #{cmd}"
+        system(cmd)
+      end
+      
       render :show, status: :created
     else
       render json: @build.errors, status: :unprocessable_entity
@@ -24,6 +30,7 @@ class BuildsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_build
+      @webhook_action = WebhookAction.find(params[:webhook_action_id])
       @build = Build.find(params[:id])
     end
 

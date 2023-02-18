@@ -21,7 +21,9 @@
         <td><%= link_to 'Show', webhook_action %></td>
         <td><%= link_to 'Builds', webhook_action_builds_path(webhook_action) %></td>
         <td><%= link_to 'Edit', edit_webhook_action_path(webhook_action) %></td>
-        <td><%= link_to 'Destroy', webhook_action, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>          
+          <%= link_to 'Destroy', webhook_actions_delete_path(webhook_action), html_options: {"data-method": :delete} %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do  
   # resources :builds
+  get 'webhook_actions/:id/delete' => 'webhook_actions#destroy', as: 'webhook_actions_delete'
   resources :webhook_actions do
     resources :builds, only: [:create, :show, :index]
   end
