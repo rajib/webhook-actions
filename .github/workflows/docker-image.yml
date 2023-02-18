@@ -45,17 +45,15 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webhook-actions:latest
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v0.1.7
-      with:
-        host: ${{ secrets.HOST_TEST_SERVER }}
-        username: ${{ secrets.USERNAME_TEST_SERVER }}
-        password: ${{ secrets.PASSWORD_TEST_SERVER }}
-        port: ${{ secrets.PORT }}
-        script: |
-          docker stop $(docker ps -q --filter ancestor=rajibchowdhury/webhook-actions )
-          docker rmi -f $(docker images | grep 'rajibchowdhury/webhook-actions')
-          docker run --rm --env username=root --env password=toor -dt -p 9999:9999 rajibchowdhury/webhook-actions:latest
+      - 
+        name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST_TEST_SERVER }}
+          username: ${{ secrets.USERNAME_TEST_SERVER }}
+          password: ${{ secrets.PASSWORD_TEST_SERVER }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker stop $(docker ps -q --filter ancestor=rajibchowdhury/webhook-actions )
+            docker rmi -f $(docker images | grep 'rajibchowdhury/webhook-actions')
+            docker run --rm --env username=root --env password=toor -dt -p 9999:9999 rajibchowdhury/webhook-actions:latest
